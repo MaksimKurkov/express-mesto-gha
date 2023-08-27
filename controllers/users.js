@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const userModel = require('../models/user');
 
 module.exports.getUsers = (req, res) => {
-  return userModel.find({})
+  userModel.find({})
     .then((r) => {
       res.status(200).send(r);
     })
@@ -31,7 +31,7 @@ module.exports.getUserById = (req, res) => {
 module.exports.createUser = (req, res) => {
   const { name, about, avatar } = req.body;
   return userModel.create({ name, about, avatar })
-    .then((r) => { return res.status(201).send(r) })
+    .then((r) => { res.status(201).send(r); })
     .catch((e) => {
       if (e instanceof mongoose.Error.ValidationError) {
         return res.status(400).send({ message: 'Неверные данные' });
@@ -43,7 +43,7 @@ module.exports.createUser = (req, res) => {
 module.exports.updateUserData = (req, res) => {
   const { name, about } = req.body;
   return userModel.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
-    .then((r) => { return res.status(200).send(r) })
+    .then((r) => { res.status(200).send(r); })
     .catch((e) => {
       if (e instanceof mongoose.Error.ValidationError) {
         return res.status(400).send({ message: 'Неверные данные' });
@@ -58,7 +58,7 @@ module.exports.updateUserData = (req, res) => {
 module.exports.updateUserAvatar = (req, res) => {
   const { avatar } = req.body;
   return userModel.findByIdAndUpdate(req.user._id, { avatar }, { new: true })
-    .then((r) => { return res.status(200).send(r) })
+    .then((r) => { res.status(200).send(r); })
     .catch((e) => {
       if (e instanceof mongoose.Error.ValidationError) {
         return res.status(400).send({ message: 'Неверные данные' });
