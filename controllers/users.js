@@ -42,7 +42,8 @@ module.exports.createUser = (req, res) => {
 
 module.exports.updateUserData = (req, res) => {
   const { name, about } = req.body;
-  return userModel.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
+  return userModel.findByIdAndUpdate(req.user._id, { name, about }, { new: true,
+     runValidators: true })
     .then((r) => { res.status(200).send(r); })
     .catch((e) => {
       if (e instanceof mongoose.Error.ValidationError) {
