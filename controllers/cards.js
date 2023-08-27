@@ -13,7 +13,7 @@ module.exports.createCard = (req, res) => {
   const { name, link } = req.body;
   return cardModel.create({ name, link, owner: req.user._id })
     .then((r) => {
-      res.status(201).send(r);
+      res.status(201).send({ r });
     })
     .catch((err) => {
       checkErrors(err, res, {
