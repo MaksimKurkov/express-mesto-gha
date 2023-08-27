@@ -11,7 +11,7 @@ module.exports.getCards = (req, res) => {
 
 module.exports.createCard = (req, res) => {
   const { name, link } = req.body;
-  return cardModel.create({ name, link, owner: req.user._id })
+  cardModel.create({ name, link, owner: req.user._id })
     .then((r) => {
       res.status(201).send({ r });
     })
@@ -24,7 +24,7 @@ module.exports.createCard = (req, res) => {
 
 module.exports.deleteCard = (req, res) => {
   const { cardId } = req.params;
-  return cardModel.findByIdAndDelete(cardId)
+  cardModel.findByIdAndDelete(cardId)
     .orFail(() => makeNotFounError())
     .then((r) => { res.status(200).send(r); })
     .catch((err) => {

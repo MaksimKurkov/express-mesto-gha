@@ -11,7 +11,7 @@ module.exports.getUsers = (req, res) => {
 
 module.exports.getUserById = (req, res) => {
   const { userId } = req.params;
-  return userModel.findById(userId)
+  userModel.findById(userId)
     .orFail(() => makeNotFounError())
     .then((r) => { res.status(200).send(r); })
     .catch((err) => {
@@ -24,7 +24,7 @@ module.exports.getUserById = (req, res) => {
 
 module.exports.createUser = (req, res) => {
   const { name, about, avatar } = req.body;
-  return userModel.create({ name, about, avatar })
+  userModel.create({ name, about, avatar })
     .then((r) => { res.status(201).send(r); })
     .catch((err) => {
       checkErrors(err, res, {
@@ -36,7 +36,7 @@ module.exports.createUser = (req, res) => {
 module.exports.updateUserData = (req, res) => {
   const { name, about } = req.body;
   const userID = req.user._id;
-  return userModel.findByIdAndUpdate(userID, { name, about }, { new: true, runValidators: true })
+  userModel.findByIdAndUpdate(userID, { name, about }, { new: true, runValidators: true })
     .orFail(() => makeNotFounError())
     .then((r) => { res.status(200).send(r); })
     .catch((err) => {
@@ -51,7 +51,7 @@ module.exports.updateUserData = (req, res) => {
 module.exports.updateUserAvatar = (req, res) => {
   const { avatar } = req.body;
   const userID = req.user._id;
-  return userModel.findByIdAndUpdate(userID, { avatar }, { new: true, runValidators: true })
+  userModel.findByIdAndUpdate(userID, { avatar }, { new: true, runValidators: true })
     .orFail(() => makeNotFounError())
     .then((r) => { res.status(200).send(r); })
     .catch((err) => {
