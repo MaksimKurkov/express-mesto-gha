@@ -3,7 +3,7 @@ const { makeNotFounError, checkErrors } = require('../utils/utils');
 
 module.exports.getCards = (req, res) => {
   cardModel.find({})
-    .then((r) => { res.status(200).send(r); })
+    .then((r) => { res.send(r); })
     .catch((err) => {
       checkErrors(err, res);
     });
@@ -26,7 +26,7 @@ module.exports.deleteCard = (req, res) => {
   const { cardId } = req.params;
   return cardModel.findByIdAndDelete(cardId)
     .orFail(() => makeNotFounError())
-    .then((r) => { res.status(200).send(r); })
+    .then((r) => { res.send(r); })
     .catch((err) => {
       checkErrors(err, res, {
         msgNotFound: 'Карточка с указанным _id не найдена',
@@ -42,7 +42,7 @@ module.exports.addCardLike = (req, res) => {
     { new: true },
   )
     .orFail(() => makeNotFounError())
-    .then((r) => { res.status(200).send(r); })
+    .then((r) => { res.send(r); })
     .catch((err) => {
       checkErrors(err, res, {
         msgNotFound: 'Карточка с указанным _id не найдена',
@@ -58,7 +58,7 @@ module.exports.deleteCardLike = (req, res) => {
     { new: true },
   )
     .orFail(() => makeNotFounError())
-    .then((r) => { res.status(200).send(r); })
+    .then((r) => { res.send(r); })
     .catch((err) => {
       checkErrors(err, res, {
         msgNotFound: 'Карточка с указанным _id не найдена',

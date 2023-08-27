@@ -3,7 +3,7 @@ const { makeNotFounError, checkErrors } = require('../utils/utils');
 
 module.exports.getUsers = (req, res) => {
   userModel.find({})
-    .then((r) => { res.status(200).send(r); })
+    .then((r) => { res.send(r); })
     .catch((err) => {
       checkErrors(err, res);
     });
@@ -13,7 +13,7 @@ module.exports.getUserById = (req, res) => {
   const { userId } = req.params;
   return userModel.findById(userId)
     .orFail(() => makeNotFounError())
-    .then((r) => { res.status(200).send(r); })
+    .then((r) => { res.send(r); })
     .catch((err) => {
       checkErrors(err, res, {
         msgNotFound: 'Пользователь по указанному _id не найден',
@@ -38,7 +38,7 @@ module.exports.updateUserData = (req, res) => {
   const userID = req.user._id;
   return userModel.findByIdAndUpdate(userID, { name, about }, { new: true, runValidators: true })
     .orFail(() => makeNotFounError())
-    .then((r) => { res.status(200).send(r); })
+    .then((r) => { res.send(r); })
     .catch((err) => {
       checkErrors(err, res, {
         msgNotFound: 'Пользователь с указанным _id не найден',
@@ -53,7 +53,7 @@ module.exports.updateUserAvatar = (req, res) => {
   const userID = req.user._id;
   return userModel.findByIdAndUpdate(userID, { avatar }, { new: true, runValidators: true })
     .orFail(() => makeNotFounError())
-    .then((r) => { res.status(200).send(r); })
+    .then((r) => { res.send(r); })
     .catch((err) => {
       checkErrors(err, res, {
         msgNotFound: 'Пользователь с указанным _id не найден',
