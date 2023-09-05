@@ -19,7 +19,7 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.getUsers = (req, res, next) => userModel.find({})
-  .then((user) => res.send(user))
+  .then((user) => res.status(200).send(user))
   .catch((err) => next(err));
 
 module.exports.getUserById = (req, res, next) => {

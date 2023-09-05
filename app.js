@@ -24,7 +24,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 app.use(signinRouter);
 app.use(signupRouter);
 
-// app.use(auth);
+app.use(auth);
 
 app.use(userRouter);
 app.use(cardRouter);
