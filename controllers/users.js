@@ -46,12 +46,8 @@ module.exports.createUser = (req, res, next) => {
     .then((hash) => userModel.create({
       name, about, avatar, email, password: hash,
     }))
-    .then((user) => res.send({
-      name: user.name,
-      about: user.about,
-      avatar: user.avatar,
-      email: user.email,
-      _id: user._id,
+    .then((user) => res.status(201).send({
+      name: user.name, about: user.about, avatar: user.avatar, _id: user._id, email: user.email,
     }))
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
