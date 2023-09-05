@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const helmet = require('helmet');
 const { errors } = require('celebrate');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
@@ -15,9 +14,7 @@ const port = 3000;
 const app = express();
 
 app.use(express.json());
-// app.use(helmet());
 
-// подключаемся к серверу mongo
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
   useNewUrlParser: true,
 }).then(() => {
@@ -27,7 +24,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 app.use(signinRouter);
 app.use(signupRouter);
 
-app.use(auth);
+// app.use(auth);
 
 app.use(userRouter);
 app.use(cardRouter);
