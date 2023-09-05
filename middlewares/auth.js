@@ -9,9 +9,9 @@ module.exports = (req, res, next) => {
   const token = authorization.replace('Bearer ', '');
   let payload;
   try {
-    payload = jwt.verify(token, 'secretKey');
+    payload = jwt.verify(token, 'secret-key');
   } catch (err) {
-    return next(new AuthError('ошибка тут'));
+    return next(new AuthError('Необходима авторизация'));
   }
   req.user = payload;
   return next();
