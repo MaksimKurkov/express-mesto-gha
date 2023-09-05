@@ -5,6 +5,8 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
+const signinRouter = require('./routes/sign-in');
+const signupRouter = require('./routes/sign-up');
 const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/error-middlewares');
 const NotFoundError = require('./errors/not-found-error');
@@ -23,6 +25,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 }).then(() => {
   console.log('Монго подключена');
 });
+
+app.use(signinRouter);
+app.use(signupRouter);
 
 app.use(auth);
 
