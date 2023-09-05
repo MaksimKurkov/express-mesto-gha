@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const { login, createUser } = require('./controllers/users');
 const userRouter = require('./routes/users');
 const cardRouter = require('./routes/cards');
 const auth = require('./middlewares/auth');
@@ -24,9 +23,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 }).then(() => {
   console.log('Монго подключена');
 });
-
-app.post('/signin', login);
-app.post('/signup', createUser);
 
 app.use(auth);
 
