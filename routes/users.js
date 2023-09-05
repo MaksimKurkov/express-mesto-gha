@@ -8,7 +8,6 @@ const {
   updateUserData,
   updateUserAvatar,
   getMe,
-
 } = require('../controllers/users');
 
 router.get('/users', getUsers);
