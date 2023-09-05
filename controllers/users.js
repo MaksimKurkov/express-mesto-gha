@@ -49,7 +49,6 @@ module.exports.createUser = (req, res, next) => {
     .then((user) => res.status(201).send({
       name: user.name, about: user.about, avatar: user.avatar, _id: user._id, email: user.email,
     }))
-    .then((user) => { console.log(user); })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
         next(new BadRequestError(err.message));
@@ -99,7 +98,7 @@ module.exports.getMe = (req, res, next) => {
   const userId = req.user._id;
   return userModel.findById(userId)
     .orFail()
-    .then((currentUser) => res.send(currentUser))
+    .then((currentUser) => res.send({ currentUser }))
     .catch((err) => {
       if (err instanceof mongoose.Error.DocumentNotFoundError) {
         next(new NotFoundError(`Пользователь по данному _id: ${req.user._id} не найден.`));
