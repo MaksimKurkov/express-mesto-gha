@@ -5,14 +5,14 @@ const ForbiddenError = require('../errors/forbidden-error');
 const NotFoundError = require('../errors/not-found-error');
 
 module.exports.getCards = (req, res, next) => cardModel.find({})
-  .then((r) => { res.send(r); })
+  .then((cards) => { res.send(cards); })
   .catch(next);
 
 module.exports.createCard = (req, res, next) => {
   const { name, link } = req.body;
   return cardModel.create({ name, link, owner: req.user._id })
-    .then((r) => {
-      res.status(201).send(r);
+    .then((cards) => {
+      res.status(201).send(cards);
     })
     .catch((err) => {
       if (err instanceof mongoose.Error.ValidationError) {
