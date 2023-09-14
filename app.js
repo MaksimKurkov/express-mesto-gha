@@ -38,4 +38,5 @@ app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Запущен порт ${port}`);
+  console.log('Проверка');
 });
